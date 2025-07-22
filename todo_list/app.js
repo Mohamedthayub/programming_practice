@@ -4,12 +4,6 @@ const todoContainer = document.querySelector(".todo-container");
 const userNameError = document.querySelector("#username-error");
 
 
-
-// todoContainer.addEventListener("click",(e) => {
-//     if(e.target.tagName == "button"){
-//         todoContainer.removeChild();
-//     }
-// })
 addButton.addEventListener("click",(e) => {
     const  userInput = userInputField.value;
     const isValid = validateUserinput(userInput.toString());
