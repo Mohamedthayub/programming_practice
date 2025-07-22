@@ -5,6 +5,11 @@ const userNameError = document.querySelector("#username-error");
 
 
 
+// todoContainer.addEventListener("click",(e) => {
+//     if(e.target.tagName == "button"){
+//         todoContainer.removeChild();
+//     }
+// })
 addButton.addEventListener("click",(e) => {
     const  userInput = userInputField.value;
     const isValid = validateUserinput(userInput.toString());
@@ -17,6 +22,7 @@ addButton.addEventListener("click",(e) => {
     }
     
 })
+
 
 function  validateUserinput(data){
     if(data.length < 1){
@@ -40,10 +46,16 @@ function createTodo(item){
     todoItem.textContent = item;
     deleteBtn.textContent = "Delete"
 
+    deleteBtn.addEventListener("click",() => {
+        container.remove();
+    })
+
     container.appendChild(todoItem);
     container.appendChild(deleteBtn);
 
 
     todoContainer.appendChild(container);
 }
+
+
     
