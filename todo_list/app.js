@@ -3,6 +3,9 @@ const addButton = document.querySelector("#add");
 const todoContainer = document.querySelector(".todo-container");
 const userNameError = document.querySelector("#username-error");
 
+document.addEventListener("DOMContentLoaded", () => {
+    showData();
+});
 
 addButton.addEventListener("click",(e) => {
     const  userInput = userInputField.value;
@@ -16,6 +19,14 @@ addButton.addEventListener("click",(e) => {
     }
     
 })
+
+todoContainer.addEventListener("click",(e) => {
+    if(e.target.tagName == "P"){
+        e.target.classList.toggle("strike");
+        saveData();
+    }
+})
+
 
 
 function  validateUserinput(data){
@@ -40,16 +51,31 @@ function createTodo(item){
     todoItem.textContent = item;
     deleteBtn.textContent = "Delete"
 
-    deleteBtn.addEventListener("click",() => {
-        container.remove();
-    })
 
     container.appendChild(todoItem);
     container.appendChild(deleteBtn);
 
 
     todoContainer.appendChild(container);
+    saveData();
+}
+
+function saveData(){
+    localStorage.setItem("todo",todoContainer.innerHTML);
+}
+
+function showData() {
+    todoContainer.innerHTML = localStorage.getItem("todo");
+    
+    // Re-bind event listeners to Delete buttons
+    const deleteButtons = document.querySelectorAll(".todo-dlt");
+    deleteButtons.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.target.parentElement.remove();
+            saveData();
+        });
+    });
 }
 
 
-    
+showData();
